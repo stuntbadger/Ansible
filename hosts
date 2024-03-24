@@ -1,0 +1,9 @@
+[docker]
+192.168.1.233
+
+[yum]
+docker.local
+vpn.local
+
+[apt]
+navidrome.local ansible_user=stuntbadger ansible_sudo_pass=Pa55Word001
