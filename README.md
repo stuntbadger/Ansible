@@ -38,7 +38,7 @@ once copied check that you can ssh to the server using the key e.g.
 ssh -i /root/.ssh/ansible docker.local
 ```
 
-## sanity chcek ansible can reach the clients 
+## sanity check ansible can reach the clients 
 This is a usefull part of ansible make sure that ansible can ping the servers. 
 
 ```bash
