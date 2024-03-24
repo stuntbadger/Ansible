@@ -7,3 +7,9 @@ vpn.local
 
 [apt]
 navidrome.local ansible_user=stuntbadger ansible_sudo_pass=Pa55Word001
+
+[camera]
+Mailbox.local
+car.local
+carlong.local
+ircamera.local
