@@ -8,6 +8,11 @@ This Playbook will update all the yum and apt hosts
  ansible-playbook update_playbook.yaml
 ```
 
+This play book is to reboot MotionEye servers ( bit of a unique one as the /root is all Read Only so have to redirect to a mountpoint thats ansible can write to ) 
+```bash
+ ansible-playbook reboot_CCTV.yaml
+```
+
 ## Installing Ansible on Rocky Linux ( only need to do this on the Ansible server) 
 
 ```bash
