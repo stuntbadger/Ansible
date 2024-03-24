@@ -2,23 +2,35 @@
 My ansible scripts 
 
 
-Running the update 
-
+## Running the update 
+```bash
  ansible-playbook update_playbook.yaml
+```
 
-Installing Ansible on Rocky Linux 
+##Installing Ansible on Rocky Linux 
+
+```bash
 yum install epel-release
 yum install ansible
+```
 
-Create the Ansible SSH key 
+## Create the Ansible SSH key 
+
+```bash
 ssh-keygen -C "ansible"
+```
+## Copy the key to the servers 
 
-Copy the key to the servers 
+```bash
 ssh-copy-id -i /root/.ssh/ansible docker.local
+```
+## sanity chcek ansible can reach the clients 
 
-sanity chcek ansible can reach the clients 
+```bash
 ansible all -m ping --key-file ~/.ssh/ansible
+```
 
+```yaml
 vpn.local | SUCCESS => {
     "ansible_facts": {
         "discovered_interpreter_python": "/usr/bin/python3"
@@ -47,3 +59,4 @@ navidrome.local | SUCCESS => {
     "changed": false,
     "ping": "pong"
 }
+```
