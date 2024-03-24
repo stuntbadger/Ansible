@@ -7,7 +7,7 @@ My ansible scripts
  ansible-playbook update_playbook.yaml
 ```
 
-##Installing Ansible on Rocky Linux 
+## Installing Ansible on Rocky Linux 
 
 ```bash
 yum install epel-release
