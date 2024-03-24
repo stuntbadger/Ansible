@@ -4,9 +4,13 @@
 [yum]
 docker.local
 vpn.local
+plex.local
+newplex.local
+jenkins.local
 
 [apt]
 navidrome.local ansible_user=stuntbadger ansible_sudo_pass=Pa55Word001
+nginx-ubuntu.local ansible_user=stuntbadger ansible_sudo_pass=Pa55Word001
 
 [camera]
 Mailbox.local
