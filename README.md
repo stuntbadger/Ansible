@@ -1,30 +1,40 @@
 # Ansible
 My ansible scripts 
 
+## Running playbook ( Patching ) 
+This Playbook will update all the yum and apt hosts 
 
-## Running the update 
 ```bash
  ansible-playbook update_playbook.yaml
 ```
 
-## Installing Ansible on Rocky Linux 
+## Installing Ansible on Rocky Linux ( only need to do this on the Ansible server) 
 
 ```bash
 yum install epel-release
 yum install ansible
 ```
 
-## Create the Ansible SSH key 
+## Create the Ansible SSH key ( only need to do this once) 
 
 ```bash
 ssh-keygen -C "ansible"
 ```
-## Copy the key to the servers 
+## Copy the key to the servers ( need to do this for each server) 
+
+This command copys the ssh key to the desired host note you may need to spefify the username if not running as root, you may also be prompted for the password of the server
 
 ```bash
 ssh-copy-id -i /root/.ssh/ansible docker.local
 ```
+once copied check that you can ssh to the server using the key e.g.
+
+```bash
+ssh -i /root/.ssh/ansible docker.local
+```
+
 ## sanity chcek ansible can reach the clients 
+This is a usefull part of ansible make sure that ansible can ping the servers. 
 
 ```bash
 ansible all -m ping --key-file ~/.ssh/ansible
