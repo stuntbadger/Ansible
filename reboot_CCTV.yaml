@@ -1,0 +1,9 @@
+---
+- hosts: camera
+  vars:
+    ansible_remote_tmp: /home/ftp/sdcard
+  tasks:
+    - debug:
+        var: ansible_remote_tmp
+    - name: rebooting servers
+      command: /sbin/reboot
