@@ -8,9 +8,15 @@ plex.local ansible_user=root
 newplex.local ansible_user=root
 jenkins.local ansible_user=root
 
+[apt:vars]
+ansible_user=stuntbadger
+ansible_become=yes
+ansible_become_method=sudo
+ansible_sudo_pass='{{ ubuntu_sudo_user }}'
+
 [apt]
-navidrome.local ansible_user=stuntbadger ansible_sudo_pass=Pa55Word001
-nginx-ubuntu.local ansible_user=stuntbadger ansible_sudo_pass=Pa55Word001
+navidrome.local
+nginx-ubuntu.local 
 
 [camera]
 Mailbox.local ansible_user=root ansible_remote_tmp=/home/ftp/sdcard

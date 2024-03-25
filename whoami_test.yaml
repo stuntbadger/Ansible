@@ -1,0 +1,19 @@
+---
+- name:  check to see whoami to see if running as root you need to run with --vvv to see this in the output
+  hosts: apt
+  become: true
+  tasks:
+    - name: include vault
+      ansible.builtin.include_vars:
+         file: passwd.yaml
+    - name: Check if the RPM package is installed
+      command: whoami
+      register: rpm_check
+      ignore_errors: true
+
+    - name: Run further shell commands
+      shell: |
+        # Your further shell commands here
+        cat /etc/hosts
+      args:
+        executable: /bin/bash
