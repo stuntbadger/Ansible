@@ -1,0 +1,21 @@
+---
+- name: Check RPM installation and run further commands
+  hosts: docker
+  tasks:
+#    - name: Check if the RPM package is installed
+#      command: rpm -qa lynx
+#      register: rpm_check
+#      ignore_errors: true
+
+    - name: Install the RPM package if not already installed
+      yum:
+        name: lynx
+        state: present
+#      when: rpm_check.rc != 0
+
+    - name: Run further shell commands
+      shell: |
+        # Your further shell commands here
+        cat /etc/hosts
+      args:
+        executable: /bin/bash
