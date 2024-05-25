@@ -1,0 +1,52 @@
+---
+- name: Snapshot, Patch, and Clean Up VM
+  hosts: all
+  gather_facts: no
+  vars:
+    vm_name: "your_vm_name"
+    snapshot_name: "pre_patch_snapshot"
+    description: "Snapshot before patching the server"
+    esxi_hostname: "your_esxi_host"
+    vcenter_hostname: "your_vcenter_server"
+    vcenter_username: "your_vcenter_username"
+    vcenter_password: "your_vcenter_password"
+    vm_uuid: "your_vm_uuid"  # Use UUID if you want to be precise
+
+  tasks:
+    - name: Create a snapshot of the VM
+      community.vmware.vmware_guest_snapshot:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        name: "{{ vm_name }}"
+        uuid: "{{ vm_uuid }}"
+        state: present
+        snapshot_name: "{{ snapshot_name }}"
+        description: "{{ description }}"
+      delegate_to: localhost
+
+    - name: Patch the RHEL server
+      yum:
+        name: '*'
+        state: latest
+      register: patch_result
+
+    - name: Remove the snapshot if patching is successful
+      community.vmware.vmware_guest_snapshot:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        name: "{{ vm_name }}"
+        uuid: "{{ vm_uuid }}"
+        snapshot_name: "{{ snapshot_name }}"
+        state: absent
+      when: patch_result is succeeded
+      delegate_to: localhost
+
+    - name: Fail the playbook if patching failed
+      fail:
+        msg: "Patching failed. Please check the server."
+      when: patch_result is failed
+
